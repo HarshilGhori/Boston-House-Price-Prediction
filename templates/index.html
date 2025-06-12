@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston Housing Price Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f8;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 30px;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: 500;
+            color: #444;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .buttons input[type="submit"],
+        .buttons button {
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .buttons input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .buttons button {
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #28a745;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Boston Housing Price Prediction</h2>
+        <form id="predictionForm" action="/predict" method="post">
+
+            <label>CRIM:</label>
+            <input type="text" name="CRIM" required>
+
+            <label>ZN:</label>
+            <input type="text" name="ZN" required>
+
+            <label>INDUS:</label>
+            <input type="text" name="INDUS" required>
+
+            <label>CHAS:</label>
+            <input type="text" name="CHAS" required>
+
+            <label>NOX:</label>
+            <input type="text" name="NOX" required>
+
+            <label>RM:</label>
+            <input type="text" name="RM" required>
+
+            <label>AGE:</label>
+            <input type="text" name="AGE" required>
+
+            <label>DIS:</label>
+            <input type="text" name="DIS" required>
+
+            <label>RAD:</label>
+            <input type="text" name="RAD" required>
+
+            <label>TAX:</label>
+            <input type="text" name="TAX" required>
+
+            <label>PTRATIO:</label>
+            <input type="text" name="PTRATIO" required>
+
+            <label>B:</label>
+            <input type="text" name="B" required>
+
+            <label>LSTAT:</label>
+            <input type="text" name="LSTAT" required>
+
+            <div class="buttons">
+                <input type="submit" value="Predict">
+                <button type="button" onclick="clearForm()">Clear</button>
+            </div>
+
+            {% if prediction_text %}
+                <div class="result" id="resultBox">
+                    <h3>{{ prediction_text }}</h3>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <script>
+        function clearForm() {
+            const form = document.getElementById('predictionForm');
+            form.reset();
+
+            const resultBox = document.getElementById('resultBox');
+            if (resultBox) {
+                resultBox.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>
